@@ -91,14 +91,15 @@ app.post("/api/prompts/:id/vote", async (req, res) => {
     }
 
     if (type === 'up') {
-      prompt.upvotes += 1;
+      await prompt.increment('upvotes');
     } else if (type === 'down') {
-      prompt.downvotes += 1;
+      await prompt.increment('downvotes');
     } else {
       return res.status(400).json({ error: "Invalid vote type. Use 'up' or 'down'." });
     }
 
-    await prompt.save();
+    // Reload to get updated values
+    await prompt.reload();
 
     // Return the updated prompt with the new score
     const updatedPrompt = prompt.toJSON();

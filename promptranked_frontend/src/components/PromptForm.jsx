@@ -17,7 +17,8 @@ const PromptForm = ({ onPromptCreated }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/prompts', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await axios.post(`${apiUrl}/api/prompts`, {
         title,
         content,
         category,

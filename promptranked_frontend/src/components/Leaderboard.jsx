@@ -10,7 +10,8 @@ const Leaderboard = ({ refreshTrigger }) => {
   const fetchPrompts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/prompts');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await axios.get(`${apiUrl}/api/prompts`);
       setPrompts(response.data);
       setError('');
     } catch (err) {

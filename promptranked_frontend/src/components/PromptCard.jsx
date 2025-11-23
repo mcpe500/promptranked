@@ -4,7 +4,8 @@ import axios from 'axios';
 const PromptCard = ({ prompt, onVote }) => {
   const handleVote = async (type) => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/prompts/${prompt.id}/vote`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await axios.post(`${apiUrl}/api/prompts/${prompt.id}/vote`, {
         type,
       });
 

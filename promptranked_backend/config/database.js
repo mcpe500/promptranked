@@ -2,10 +2,12 @@ const { Sequelize } = require('sequelize');
 const path = require('path');
 
 // Initialize Sequelize with SQLite
-// Use /tmp for write permissions in restricted sandbox environments if necessary
+// Allow storage path to be configured via environment variable
+const storagePath = process.env.DB_STORAGE || path.join(__dirname, '..', 'database.sqlite');
+
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: '/tmp/database.sqlite',
+  storage: storagePath,
   logging: console.log,
 });
 

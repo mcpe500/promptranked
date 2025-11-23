@@ -44,6 +44,7 @@ describe('PromptForm Component', () => {
     fireEvent.click(screen.getByRole('button', { name: /Submit Prompt/i }));
 
     await waitFor(() => {
+      // Expecting call to default localhost since no env var is mocked in test environment yet
       expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/prompts', {
         title: 'Test Title',
         content: 'Test Content',
